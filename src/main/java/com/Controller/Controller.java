@@ -1,14 +1,18 @@
 package com.Controller;
 
+import com.Model.Character;
 import com.Model.ClientInput;
 import com.Model.Match;
 import com.Model.User;
+import com.Response.CharacterResponse;
 import com.Response.MatchResponse;
 import com.Response.UserResponse;
+import com.Service.Character.CharacterService;
 import com.Service.Match.MatchService;
 import com.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.text.normalizer.UCharacter;
 
 @RestController
 public class Controller {
@@ -18,6 +22,9 @@ public class Controller {
 
     @Autowired
     MatchService matchService;
+
+    @Autowired
+    CharacterService characterService;
 
     @PostMapping("/register")
     public UserResponse register(@RequestBody User user){
@@ -34,8 +41,8 @@ public class Controller {
         return matchResponse;
     }
 
-    @GetMapping("/matchhistory")
-    public MatchResponse match(@RequestBody ClientInput clientInput){
+    @GetMapping("/matchConsult")
+    public MatchResponse matchConsult(@RequestBody ClientInput clientInput){
 
         MatchResponse matchResponse = matchService.findById(clientInput);
         return matchResponse;
@@ -45,5 +52,19 @@ public class Controller {
     public UserResponse search(@RequestBody ClientInput clientInput){
 
         return userService.findBy(clientInput);
+    }
+
+    @PostMapping("/createCharacter")
+    public CharacterResponse createCharacter(@RequestBody Character character){
+
+        CharacterResponse characterResponse = characterService.save(character);
+
+        return characterResponse;
+    }
+
+    @GetMapping("/championData")
+    public CharacterResponse championData(@RequestBody ClientInput clientInput){
+
+        return characterService.findbyId(clientInput);
     }
 }

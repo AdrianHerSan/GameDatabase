@@ -1,5 +1,6 @@
 package com.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +38,10 @@ public class User {
     @JsonIgnoreProperties("users")
     @ManyToMany(mappedBy = "users")
     private Set<Match> matches;
+
+    @JsonIgnoreProperties("users")
+    @ManyToMany(mappedBy = "users")
+    private List<Character> characters;
 
 
 

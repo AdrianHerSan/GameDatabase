@@ -13,5 +13,5 @@ public interface UserService {
     UserResponse findByNickname(String clientInput);
     UserResponse findByUsername(String clientInput);
     UserResponse findByEmail(String clientInput);
-    //UserResponse findByRanking(String cientInput);
+    //UserResponse findByRanking(String clientInput);
 }

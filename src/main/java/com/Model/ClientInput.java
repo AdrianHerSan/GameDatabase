@@ -15,7 +15,7 @@ public class ClientInput {
 
     public enum SearchCriteria {username, nickname, email, ranking}
 
-    private boolean tuyu;
+    private boolean isMatchHistory;
 
 
 }
