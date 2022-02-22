@@ -23,29 +23,17 @@ public class User {
     @GeneratedValue()
     private int userId;
 
-    @Column(name = "username", length = 16)
+    @Column(name = "username", length = 16, nullable = false)
     private String username;
 
-    @Column(name = "nickname", length = 16)
+    @Column(name = "nickname", length = 16, nullable = false)
     private  String nickname;
 
-    @Column(name = "email", length = 24)
+    @Column(name = "email", length = 24, nullable = false)
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Ranking ranking;
-
-    @JsonIgnoreProperties("users")
-    @ManyToMany(mappedBy = "users")
-    private Set<Match> matches;
-
-    @JsonIgnoreProperties("users")
-    @ManyToMany(mappedBy = "users")
-    private List<Character> characters;
-
-
-
-
 
 
 }

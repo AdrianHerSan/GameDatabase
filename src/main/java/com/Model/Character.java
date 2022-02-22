@@ -26,12 +26,4 @@ public class Character {
     @Column(name = "charactername", length = 16)
     private String characterName;
 
-    @JsonIgnoreProperties("characters")
-    @ManyToMany
-    @JoinTable(name = "characters_users",
-            joinColumns =  @JoinColumn(name = "characterId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
-    private List<User> users;
-
-
 }

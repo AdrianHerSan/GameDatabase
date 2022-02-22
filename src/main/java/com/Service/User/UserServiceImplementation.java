@@ -73,6 +73,19 @@ public class UserServiceImplementation implements UserService {
         return new UserResponse(userList, HttpStatus.OK, "findByEmail is done");
     }
 
+    @Override
+    public UserResponse UpdateRanking(Integer id) {
+        User user = userRepository.getById(id);
+        if(userRepository.gameRecount(user)>=2){
+
+            Integer newRank = user.getRanking().getId() + 1;
+            User user1 = userRepository.findById(id);
+            userRepository.
+            user.setRanking();
+        }
+        return null;
+    }
+
    /* @Override
     public UserResponse findByRanking(String clientInput) {
 
