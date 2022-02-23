@@ -74,16 +74,19 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserResponse UpdateRanking(Integer id) {
-        User user = userRepository.getById(id);
-        if(userRepository.gameRecount(user)>=2){
+    public void UpdateMatches(User user, boolean victory) {
+            int matches = user.getTotalmatches();
+            if(victory){
+                int victories = user.getVictories();
+                victories ++;
+                user.setVictories(victories);
+            }
 
-            Integer newRank = user.getRanking().getId() + 1;
-            User user1 = userRepository.findById(id);
-            userRepository.
-            user.setRanking();
-        }
-        return null;
+            matches ++;
+
+            user.setTotalmatches(matches);
+
+            userRepository.updateUserVictory(user);
     }
 
    /* @Override

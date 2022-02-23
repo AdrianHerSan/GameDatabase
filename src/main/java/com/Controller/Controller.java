@@ -12,7 +12,6 @@ import com.Service.Match.MatchService;
 import com.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.text.normalizer.UCharacter;
 
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class Controller {
     public GameParticipationResponse GameParticipationList(@RequestBody List<GameParticipation> gamesList){
 
         GameParticipationResponse gameParticipationResponse = gameParticipationService.saveGameParticipationList(gamesList);
-
         return gameParticipationResponse;
     }
+
 }

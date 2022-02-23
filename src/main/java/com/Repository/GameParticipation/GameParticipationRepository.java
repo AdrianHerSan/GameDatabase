@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GameParticipationRepository extends JpaRepository<GameParticipation, Integer> {
 
-    Integer findByActiveTrue();
+    Integer CountByIdAndVictoryTrue(Integer id);
 }

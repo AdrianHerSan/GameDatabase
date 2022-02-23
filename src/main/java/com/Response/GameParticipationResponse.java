@@ -1,6 +1,5 @@
 package com.Response;
 
-import com.Model.Character;
 import com.Model.GameParticipation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
