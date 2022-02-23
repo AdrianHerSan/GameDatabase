@@ -1,6 +1,7 @@
 src/main/resources/application.properties
 target
-./target/classes
-./.idea
+./target/*
+./.idea/*
 src/main/java/com/Controller/Controller.java
 src/main/java/com/Model
+.\target\*
