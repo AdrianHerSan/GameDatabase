@@ -73,6 +73,22 @@ public class UserServiceImplementation implements UserService {
         return new UserResponse(userList, HttpStatus.OK, "findByEmail is done");
     }
 
+    @Override
+    public void updateMatches(User user, boolean victory) {
+            int matches = user.getTotalmatches();
+            if(victory){
+                int victories = user.getVictories();
+                victories ++;
+                user.setVictories(victories);
+            }
+
+            matches ++;
+
+            user.setTotalmatches(matches);
+
+            userRepository.updateMatches(user);
+    }
+
    /* @Override
     public UserResponse findByRanking(String clientInput) {
 

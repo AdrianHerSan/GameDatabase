@@ -1,0 +1,9 @@
+#server.port="your server port"
+
+#spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=update
+#in case using mariah db:
+#spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+#spring.datasource.url=your url fot the data source
+#spring.datasource.username=your username
+#spring.datasource.password=your password

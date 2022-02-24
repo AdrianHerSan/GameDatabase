@@ -1,22 +1,27 @@
 package com.Controller;
 
+import com.Model.*;
 import com.Model.Character;
-import com.Model.ClientInput;
-import com.Model.Match;
-import com.Model.User;
 import com.Response.CharacterResponse;
+import com.Response.GameParticipationResponse;
 import com.Response.MatchResponse;
 import com.Response.UserResponse;
 import com.Service.Character.CharacterService;
+import com.Service.GameParticipation.GameParticipationService;
 import com.Service.Match.MatchService;
 import com.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import sun.text.normalizer.UCharacter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class Controller {
 
+    int al;
     @Autowired
     UserService userService;
 
@@ -26,6 +31,9 @@ public class Controller {
     @Autowired
     CharacterService characterService;
 
+    @Autowired
+    GameParticipationService gameParticipationService;
+
     @PostMapping("/register")
     public UserResponse register(@RequestBody User user){
 
@@ -34,7 +42,7 @@ public class Controller {
         return userResponse;
     }
 
-    @PostMapping("/match")
+    @PostMapping("/newmatch")
     public MatchResponse match(@RequestBody Match match){
 
         MatchResponse matchResponse = matchService.save(match);
@@ -67,4 +75,13 @@ public class Controller {
 
         return characterService.findbyId(clientInput);
     }
+
+    @PostMapping("/GameParticipation/CreateList")
+    public GameParticipationResponse GameParticipationList(@RequestBody List<GameParticipation> gamesList){
+
+        //GameParticipationResponse gameParticipationResponse = gameParticipationService.saveGameParticipationList(gamesList);
+        List<Optional<GameParticipation>> testlist = new ArrayList<>();
+        return /*gameParticipationResponse*/ new GameParticipationResponse(testlist, HttpStatus.OK,"");
+    }
+
 }
