@@ -4,6 +4,8 @@ import com.Model.ClientInput;
 import com.Model.User;
 import com.Repository.User.UserRepository;
 import com.Response.UserResponse;
+import com.Service.GameParticipation.GameParticipationService;
+import com.Service.Ranking.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class UserServiceImplementation implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RankingService rankingService;
 
 
     @Override
@@ -74,10 +79,15 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updateMatches(User user, boolean victory) {
-            int matches = user.getTotalmatches();
+    public void updateMatches(Integer id, boolean victory) {
+        try{
+
+            User user = obtainUser(id);
+
+            Integer matches = user.getTotalmatches();
+            Integer victories = user.getVictories();
+
             if(victory){
-                int victories = user.getVictories();
                 victories ++;
                 user.setVictories(victories);
             }
@@ -86,7 +96,43 @@ public class UserServiceImplementation implements UserService {
 
             user.setTotalmatches(matches);
 
+            user.setRanking(rankingService.getById(updateRanking(victories)));
+
             userRepository.updateMatches(user);
+
+        }catch (Exception e){
+            System.out.println("invalid id on updateMatches = "+id);
+        }
+    }
+
+    @Override
+    public Integer updateRanking(Integer victories) {
+
+        if(victories <= 5){
+            return 4;
+        }else if(victories<=10) {
+            return 1;
+        }else if (victories <= 20){
+            return 2;
+        }else{
+            return 3;
+        }
+
+
+
+
+    }
+
+    User obtainUser(Integer id){
+        User user = null;
+        Optional <User> userOptional = userRepository.findById(id);
+
+        if(userOptional.isPresent()){
+
+            user = userOptional.get();
+        }
+
+        return user;
     }
 
    /* @Override

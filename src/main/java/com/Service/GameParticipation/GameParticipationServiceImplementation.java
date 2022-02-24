@@ -25,24 +25,30 @@ public class GameParticipationServiceImplementation implements GameParticipation
     @Autowired
     GameParticipationRepository repository;
 
-    /*@Autowired
-    UserService userService;*/
+    @Autowired
+    UserService userService;
 
     @Override
     @Transactional
-    public GameParticipationResponse saveGameParticipationList(List<GameParticipation> gameParticipationList) {
+    public GameParticipationResponse saveGameParticipationList(List<GameParticipation> gameList) {
 
         try {
-            for (GameParticipation game : gameParticipationList) {
+            for (GameParticipation game : gameList) {
                 games.add(Optional.of(repository.save(game)));
 
-                //userService.UpdateMatches(game.getUser(), game.isVictory());
+                userService.updateMatches(game.getUser().getUserId(), game.isVictory());
             }
             return new GameParticipationResponse(games, HttpStatus.OK, "saveGameParticipationList is done");
         }catch (Exception e){
             logger.error("saveGameParticipationList function is not working");
             return null;
         }
+    }
+
+    @Override
+    public Integer changeRanking(Integer id) {
+
+        return repository.countByGameIdAndVictoryTrue(id);
     }
 
 }

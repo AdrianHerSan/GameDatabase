@@ -1,9 +1,12 @@
 package com.Service.User;
 
 
-import com.Model.ClientInput;
-import com.Model.User;
-import com.Response.UserResponse;
+
+
+import com.Model.*;
+import com.Response.*;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -14,6 +17,7 @@ public interface UserService {
     UserResponse findByUsername(String clientInput);
     UserResponse findByEmail(String clientInput);
     //UserResponse findByRanking(String clientInput);
-    void updateMatches(User user, boolean victory);
+    void updateMatches(Integer id, boolean victory);
+    Integer updateRanking(Integer victories);
 
 }

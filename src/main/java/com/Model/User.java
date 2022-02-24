@@ -33,10 +33,10 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     private Ranking ranking;
 
-    @Column(name = "victories")
+    @Column(name = "victories", columnDefinition = "integer default 0", nullable = false)
     private Integer victories;
 
-    @Column(name = "totalmatches")
+    @Column(name = "totalmatches", columnDefinition = "integer default 0", nullable = false)
     private Integer totalmatches;
 
 

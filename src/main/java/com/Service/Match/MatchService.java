@@ -1,6 +1,6 @@
 package com.Service.Match;
 
-import com.Model.ClientInput;
+import com.Model.*;
 import com.Model.Match;
 import com.Response.MatchResponse;
 
