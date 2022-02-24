@@ -74,7 +74,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void UpdateMatches(User user, boolean victory) {
+    public void updateMatches(User user, boolean victory) {
             int matches = user.getTotalmatches();
             if(victory){
                 int victories = user.getVictories();
@@ -86,7 +86,7 @@ public class UserServiceImplementation implements UserService {
 
             user.setTotalmatches(matches);
 
-            userRepository.updateUserVictory(user);
+            userRepository.updateMatches(user);
     }
 
    /* @Override

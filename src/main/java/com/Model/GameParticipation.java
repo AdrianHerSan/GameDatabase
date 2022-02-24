@@ -18,7 +18,7 @@ public class GameParticipation {
 
     @Id
     @GeneratedValue
-    private int GameId;
+    private Integer gameId;
 
     @ManyToOne
     private User user;

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface GameParticipationService {
 
-    GameParticipationResponse saveGameParticipationList(List<GameParticipation> gameParticipationList);
+   GameParticipationResponse saveGameParticipationList(List<GameParticipation> gameParticipationList);
 
 }

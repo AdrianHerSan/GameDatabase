@@ -9,13 +9,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 
 @Repository
-public class customUserRespositoryImplementation implements customUserRepository{
+public class UserRepositoryCustomImplementation implements UserRepositoryCustom {
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
-    public boolean updateUserVictory(User user) {
+    public boolean updateMatches(User user) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<User> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);

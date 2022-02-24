@@ -25,8 +25,8 @@ public class GameParticipationServiceImplementation implements GameParticipation
     @Autowired
     GameParticipationRepository repository;
 
-    @Autowired
-    UserService userService;
+    /*@Autowired
+    UserService userService;*/
 
     @Override
     @Transactional
@@ -36,7 +36,7 @@ public class GameParticipationServiceImplementation implements GameParticipation
             for (GameParticipation game : gameParticipationList) {
                 games.add(Optional.of(repository.save(game)));
 
-                userService.UpdateMatches(game.getUser(), game.isVictory());
+                //userService.UpdateMatches(game.getUser(), game.isVictory());
             }
             return new GameParticipationResponse(games, HttpStatus.OK, "saveGameParticipationList is done");
         }catch (Exception e){

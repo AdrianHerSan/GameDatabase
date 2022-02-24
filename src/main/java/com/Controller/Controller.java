@@ -11,9 +11,12 @@ import com.Service.GameParticipation.GameParticipationService;
 import com.Service.Match.MatchService;
 import com.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class Controller {
@@ -76,8 +79,9 @@ public class Controller {
     @PostMapping("/GameParticipation/CreateList")
     public GameParticipationResponse GameParticipationList(@RequestBody List<GameParticipation> gamesList){
 
-        GameParticipationResponse gameParticipationResponse = gameParticipationService.saveGameParticipationList(gamesList);
-        return gameParticipationResponse;
+        //GameParticipationResponse gameParticipationResponse = gameParticipationService.saveGameParticipationList(gamesList);
+        List<Optional<GameParticipation>> testlist = new ArrayList<>();
+        return /*gameParticipationResponse*/ new GameParticipationResponse(testlist, HttpStatus.OK,"");
     }
 
 }

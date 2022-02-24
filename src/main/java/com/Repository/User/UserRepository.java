@@ -2,12 +2,10 @@ package com.Repository.User;
 
 import com.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-public interface UserRepository extends JpaRepository<User, Integer>, customUserRepository{
+public interface UserRepository extends JpaRepository<User, Integer>, UserRepositoryCustom {
 
         List<User> findByNickname(String clientInput);
 
@@ -16,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer>, customUser
         List<User> findByEmail(String clientInput);
 
         List<User> findByRanking(Enum clientInput);
+
+        
 }

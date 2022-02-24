@@ -14,6 +14,6 @@ public interface UserService {
     UserResponse findByUsername(String clientInput);
     UserResponse findByEmail(String clientInput);
     //UserResponse findByRanking(String clientInput);
-    void UpdateMatches(User user, boolean victory);
+    void updateMatches(User user, boolean victory);
 
 }
