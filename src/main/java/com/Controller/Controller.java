@@ -2,13 +2,11 @@ package com.Controller;
 
 import com.Model.*;
 import com.Model.Character;
-import com.Response.CharacterResponse;
-import com.Response.GameParticipationResponse;
-import com.Response.MatchResponse;
-import com.Response.UserResponse;
+import com.Response.*;
 import com.Service.Character.CharacterService;
 import com.Service.GameParticipation.GameParticipationService;
 import com.Service.Match.MatchService;
+import com.Service.Ranking.RankingService;
 import com.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +29,9 @@ public class Controller {
 
     @Autowired
     GameParticipationService gameParticipationService;
+
+    @Autowired
+    RankingService rankingService;
 
     @PostMapping("/register")
     public UserResponse register(@RequestBody User user){
@@ -57,6 +58,7 @@ public class Controller {
     @GetMapping("/search")
     public UserResponse search(@RequestBody ClientInput clientInput){
 
+        //search by filter having user's input and one of the criteria
         return userService.findBy(clientInput);
     }
 
@@ -81,5 +83,6 @@ public class Controller {
 
         return gameParticipationResponse;
     }
+
 
 }

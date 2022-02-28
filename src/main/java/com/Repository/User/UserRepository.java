@@ -1,5 +1,6 @@
 package com.Repository.User;
 
+import com.Model.Ranking;
 import com.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,7 +14,9 @@ public interface UserRepository extends JpaRepository<User, Integer>, UserReposi
 
         List<User> findByEmail(String clientInput);
 
-        List<User> findByRanking(Enum clientInput);
+        List<User> findByRanking(Ranking clientInput);
+
+
 
         
 }

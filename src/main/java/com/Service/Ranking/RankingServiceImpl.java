@@ -1,7 +1,7 @@
 package com.Service.Ranking;
 
 import com.Model.Ranking;
-import com.Repository.RankingRepository;
+import com.Repository.Ranking.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

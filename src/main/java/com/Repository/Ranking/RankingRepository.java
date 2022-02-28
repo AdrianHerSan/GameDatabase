@@ -1,4 +1,4 @@
-package com.Repository;
+package com.Repository.Ranking;
 
 import com.Model.Ranking;
 import org.springframework.data.jpa.repository.JpaRepository;

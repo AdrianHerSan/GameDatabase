@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,8 @@ public class UserServiceImplementation implements UserService {
 
         userRepository.save(user);
 
+        userList.ifPresent(list-> list.clear());
+
         userList.ifPresent(list ->
                 list.add(user));
 
@@ -39,6 +42,9 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public UserResponse findBy(ClientInput clientInput) {
+
+        userList.ifPresent(list-> list.clear());
+
         switch (clientInput.getCriteria()) {
             case nickname:
                 return findByNickname(clientInput.getInput());
@@ -47,7 +53,7 @@ public class UserServiceImplementation implements UserService {
             case email:
                 return findByEmail(clientInput.getInput());
             case ranking:
-                //return findByRanking(clientInput.getInput());
+                return findByRanking(clientInput.getInput());
             default:
                 return new UserResponse(null, HttpStatus.OK, "Incorrect Criteria field");
         }
@@ -79,10 +85,22 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public UserResponse findByRanking(String clienInput) {
+        //convert String to Integer for getById
+        Integer id = Integer.parseInt(clienInput);
+
+        userList.ifPresent(list-> //get the ranking by her id and then use it to findByRanking
+                list.addAll(userRepository.findByRanking(rankingService.getById(id))));
+
+        return new UserResponse(userList, HttpStatus.OK, "findByRanking is done");
+    }
+
+    @Override
+    //update the columns for matches and victories and recalculate the new ranking of the player
     public void updateMatches(Integer id, boolean victory) {
         try{
 
-            User user = obtainUser(id);
+            User user = userRepository.getById(id);
 
             Integer matches = user.getTotalmatches();
             Integer victories = user.getVictories();
@@ -96,6 +114,7 @@ public class UserServiceImplementation implements UserService {
 
             user.setTotalmatches(matches);
 
+            //recalculate de new ranking
             user.setRanking(rankingService.getById(updateRanking(victories)));
 
             userRepository.updateMatches(user);
@@ -118,28 +137,6 @@ public class UserServiceImplementation implements UserService {
             return 3;
         }
 
-
-
-
     }
 
-    User obtainUser(Integer id){
-        User user = null;
-        Optional <User> userOptional = userRepository.findById(id);
-
-        if(userOptional.isPresent()){
-
-            user = userOptional.get();
-        }
-
-        return user;
-    }
-
-   /* @Override
-    public UserResponse findByRanking(String clientInput) {
-
-        userList.ifPresent(list -> list.addAll(userRepository.findByRanking(User.Rank.valueOf(clientInput.toLowerCase()))));
-
-        return new UserResponse(userList, HttpStatus.OK, "findByRanking is done");
-    }*/
 }

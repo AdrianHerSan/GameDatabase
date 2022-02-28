@@ -16,11 +16,14 @@ import java.util.Optional;
 public class MatchServiceImplementation implements MatchService {
 
     List<Optional<Match>> matchList = new ArrayList<>();
+
     @Autowired
     MatchRepository repository;
 
     @Override
     public MatchResponse save(Match match) {
+
+        matchList.clear();
 
         matchList.add(Optional.of(repository.save(match)));
 
@@ -29,6 +32,8 @@ public class MatchServiceImplementation implements MatchService {
 
     @Override
     public MatchResponse findById(ClientInput clientInput) {
+
+        matchList.clear();
 
         int id = Integer.parseInt(clientInput.getInput());
 

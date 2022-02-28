@@ -13,11 +13,17 @@ public interface UserService {
     UserResponse register(User user);
 
     UserResponse findBy(ClientInput clientInput);
+
     UserResponse findByNickname(String clientInput);
+
     UserResponse findByUsername(String clientInput);
+
     UserResponse findByEmail(String clientInput);
-    //UserResponse findByRanking(String clientInput);
+
+    UserResponse findByRanking(String clienInput);
+
     void updateMatches(Integer id, boolean victory);
+
     Integer updateRanking(Integer victories);
 
 }
